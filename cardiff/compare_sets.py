@@ -1,7 +1,7 @@
 import collections
-import pprint
-import os
 import glob
+import os
+import pprint
 
 
 class Machine:

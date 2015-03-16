@@ -1,9 +1,11 @@
 import re
-import compare_sets
-import utils
+
 import numpy
 from pandas import *
-import perf_cpu_tables
+
+from cardiff import compare_sets
+from cardiff import perf_cpu_tables
+from cardiff import utils
 
 
 def search_item(systems, unique_id, item, regexp, exclude_list=[], include_list=[], override_list=[]):

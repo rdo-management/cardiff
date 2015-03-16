@@ -17,7 +17,7 @@
 
 import unittest
 
-import perf_cpu_tables
+from cardiff import perf_cpu_tables
 
 
 class TestPerfLevel(unittest.TestCase):

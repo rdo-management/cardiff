@@ -16,14 +16,19 @@
 # under the License.
 
 import unittest
-
-import utils
-import check
-import compare_sets
 from sets import Set
+import os.path
+
+import cardiff
+from cardiff import utils
+from cardiff import check
+from cardiff import compare_sets
+
 
 def load_samples(bench_values):
-    for health in utils.find_file('tools/cardiff/sample', '*.hw_'):
+    module_dir = os.path.dirname(cardiff.__file__)
+    samples_dir = os.path.join(module_dir, '..', 'test_data')
+    for health in utils.find_file(samples_dir, '*.hw_'):
         bench_values.append(eval(open(health).read()))
 
 

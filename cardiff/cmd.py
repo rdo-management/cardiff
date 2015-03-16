@@ -19,16 +19,18 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+import getopt
 import os
 import sys
-import getopt
-import check
-import utils
-import compare_sets
 import math
 import shutil
-import numpy
 import glob
+
+import numpy
+
+from cardiff import check
+from cardiff import compare_sets
+from cardiff import utils
 
 
 def print_help():
@@ -319,7 +321,7 @@ def is_virtualized(bench_values):
 
 
 def plot_results(current_dir, rampup_values, job, metrics, bench_values, titles, titles_order):
-    gpm_dir = "./"
+    gpm_dir = os.path.join(os.path.dirname(__file__), '../')
     context = ""
     bench_type = job
     unit = {}
@@ -397,7 +399,7 @@ def plot_results(current_dir, rampup_values, job, metrics, bench_values, titles,
             do_plot(current_dir, gpm_dir, title, subtitle, kind, unit[kind], titles, titles_order)
 
 
-def main(argv):
+def main():
     pattern = ''
     rampup = ""
     rampup_dirs = []
@@ -406,7 +408,7 @@ def main(argv):
     detail = {'category': '', 'group': '', 'item': ''}
     global_params = {}
     try:
-        opts, args = getopt.getopt(argv[1:], "hp:l:g:c:i:I:r:o:", ['pattern', 'log-level', 'group', 'category', 'item', "ignore", "rampup", "output_dir"])
+        opts, args = getopt.getopt(sys.argv[1:], "hp:l:g:c:i:I:r:o:", ['pattern', 'log-level', 'group', 'category', 'item', "ignore", "rampup", "output_dir"])
     except getopt.GetoptError:
         print "Error: One of the options passed to the cmdline was not supported"
         print "Please fix your command line or read the help (-h option)"
@@ -557,8 +559,3 @@ def main(argv):
             print "Output results can be found in directory '%s'" % final_directory_name
     else:
         analyze_data(global_params, pattern, ignore_list, detail)
-
-
-# Main
-if __name__ == "__main__":
-    sys.exit(main(sys.argv))
